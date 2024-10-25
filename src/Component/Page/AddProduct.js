@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import axios from 'axios';
-import { withRouter } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import React, {useState, useEffect} from 'react';
 import { useStyles, BootstrapInput } from '../Style/StyleAdd';
-import { MenuItem, FormControl, Select, ListItem, ListItemIcon, ListItemText, Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Typography, Divider, Snackbar, SnackbarContent } from '@material-ui/core';
+import { MenuItem, FormControl, Select, ListItem, ListItemIcon, ListItemText, Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Typography, Divider, Snackbar, SnackbarContent } from '@mui/material';
 
-import ErrorIcon from '@material-ui/icons/Error';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import ErrorIcon from '@mui/icons-material/Error';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 
 // {/* --- IMPORT REDUCE --- */}
@@ -145,7 +145,7 @@ function AddProduct(props) {
       </Snackbar>
 
     {/* --- INPUT FORM --- */}
-    <ListItem button onClick={handleClickOpen}>
+    <ListItem button="true" onClick={handleClickOpen}>
       <ListItemIcon>
         <AddBoxIcon />
       </ListItemIcon>
@@ -316,6 +316,21 @@ const mapStateToProps = state => {
     return {
       products: state.redProduct.viewProduct
     };
+};
+
+const withRouter = Component => props => {
+  // const location = useLocation();
+  // const navigate = useNavigate();
+  const params = useParams();
+
+  return (
+    <Component
+      {...props}
+      // location={location}
+      // navigate={navigate}
+      params={params}
+    />
+  );
 };
 
 export default withRouter(connect(mapStateToProps)(AddProduct))

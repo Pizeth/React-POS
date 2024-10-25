@@ -1,21 +1,21 @@
-import { withRouter } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import NumberFormat from 'react-number-format';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import SearchIcon from '@material-ui/icons/Search';
+import { NumericFormat } from 'react-number-format';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import SearchIcon from '@mui/icons-material/Search';
 
 import {  Card, CardActionArea, CardContent, CardMedia,
-  Typography, IconButton, Grid, InputBase, Avatar  } from '@material-ui/core';
+  Typography, IconButton, Grid, InputBase, Avatar  } from '@mui/material';
 
-import RestaurantIcon from '@material-ui/icons/Restaurant';
-import AppsRoundedIcon from '@material-ui/icons/AppsRounded';
-import FiberNewRoundedIcon from '@material-ui/icons/FiberNewRounded';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import AppsRoundedIcon from '@mui/icons-material/AppsRounded';
+import FiberNewRoundedIcon from '@mui/icons-material/FiberNewRounded';
 
-import {Fab} from '@material-ui/core';
+import {Fab} from '@mui/material';
 import { useStyles } from '../Style/StyleOrder';
 
 function OrderPage (props){
@@ -141,7 +141,7 @@ function OrderPage (props){
                         </Typography>
                         <Grid container direction="row" alignItems="center">
                           <Grid item>
-                            <h3 className={classes.h3}><NumberFormat value={data.price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></h3>
+                            <h3 className={classes.h3}><NumericFormat value={data.price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></h3>
                           </Grid>
                           <Grid item>
                             <CheckCircleIcon className={classes.circleIconColor}/>
@@ -160,4 +160,20 @@ function OrderPage (props){
       </div>
     )
   }
+
+  const withRouter = Component => props => {
+    // const location = useLocation();
+    // const navigate = useNavigate();
+    const params = useParams();
+  
+    return (
+      <Component
+        {...props}
+        // location={location}
+        // navigate={navigate}
+        params={params}
+      />
+    );
+  };
+
 export default withRouter(OrderPage)

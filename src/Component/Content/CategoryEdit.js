@@ -1,14 +1,14 @@
 import clsx from 'clsx';
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
-import { TextField, Button, Divider, } from '@material-ui/core/';
+import { TextField, Button, Divider, } from '@mui/material/';
 
 import { useStyles } from '../Style/StyleAdminPage';
 
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ErrorIcon from '@material-ui/icons/Error';
-import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ErrorIcon from '@mui/icons-material/Error';
+import Snackbar from '@mui/material/Snackbar';
+import SnackbarContent from '@mui/material/SnackbarContent';
 
 const variantIcon = {
   success : CheckCircleIcon,

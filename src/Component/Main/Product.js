@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 
 import { Route } from "react-router-dom";
-import { Container, Grid, Paper } from '@material-ui/core';
+import { Container, Grid, Paper } from '@mui/material';
 import { useStyles } from '../Style/StyleAdmin';
 
 import NoActivity from '../Page/NoActivity';

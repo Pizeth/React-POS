@@ -2,15 +2,15 @@ import clsx from 'clsx';
 import axios from 'axios';
 import React,{ useState } from 'react'
 import { useStyles } from '../Style/StyleAdd';
-import { withRouter } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-import ClassIcon from '@material-ui/icons/Class';
-import { ListItem, Avatar, ListItemIcon, ListItemText, TextField, Dialog, DialogActions, DialogContent, DialogContentText, Typography, Button } from '@material-ui/core';
+import ClassIcon from '@mui/icons-material/Class';
+import { ListItem, Avatar, ListItemIcon, ListItemText, TextField, Dialog, DialogActions, DialogContent, DialogContentText, Typography, Button } from '@mui/material';
 
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ErrorIcon from '@material-ui/icons/Error';
-import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ErrorIcon from '@mui/icons-material/Error';
+import Snackbar from '@mui/material/Snackbar';
+import SnackbarContent from '@mui/material/SnackbarContent';
 
 const variantIcon = {
   success : CheckCircleIcon,
@@ -112,7 +112,7 @@ function AddCategory(props) {
         />
       </Snackbar>
 
-    <ListItem button onClick={handleClickOpen}>
+    <ListItem button="true" onClick={handleClickOpen}>
       <ListItemIcon>
         <ClassIcon />
       </ListItemIcon>
@@ -163,5 +163,20 @@ function AddCategory(props) {
     </div>
   )
 }
+
+const withRouter = Component => props => {
+  // const location = useLocation();
+  // const navigate = useNavigate();
+  const params = useParams();
+
+  return (
+    <Component
+      {...props}
+      // location={location}
+      // navigate={navigate}
+      params={params}
+    />
+  );
+};
 
 export default withRouter(AddCategory)

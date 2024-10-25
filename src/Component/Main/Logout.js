@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 
-import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { ListItem, ListItemIcon, ListItemText } from '@mui/material';
 
 class Logout extends React.Component{
   constructor(props){
@@ -20,7 +20,7 @@ class Logout extends React.Component{
   render(){
     return (
       <div>
-        <ListItem button>
+        <ListItem button="true">
           <ListItemIcon>
           <Link to='/' onClick={this.logout}>
             <PowerSettingsNewIcon />

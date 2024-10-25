@@ -1,12 +1,14 @@
 import clsx from 'clsx';
 import React, { useState } from 'react';
-import { Route, Redirect } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
-import {  CssBaseline, Drawer, AppBar, Toolbar, List, Typography, Divider,
-          IconButton, Link  } from '@material-ui/core';
+import {
+  CssBaseline, Drawer, AppBar, Toolbar, List, Typography, Divider,
+  IconButton, Link
+} from '@mui/material';
 
 import { mainListItems } from './ListMenu';
 import { useStyles } from '../Style/StyleDashboard';
@@ -80,23 +82,15 @@ function App() {
       {/* Content */}
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-          <div className="dashboard-panel-container">
-            <Route exact path='/dashboard'>
-              {!token ? <Redirect to="/"/> : (<Introduction />)}
-            </Route>
-            <Route path='/dashboard/product'>
-              {!token ? <Redirect to="/"/> : (<Order />)}
-            </Route>
-            <Route path='/dashboard/report'>
-              {!token ? <Redirect to="/"/> : (<Report />)}
-            </Route>
-            <Route path='/dashboard/adminproduct'>
-              {!token ? <Redirect to="/"/> : (<Product />)}
-            </Route>
-            <Route path='/dashboard/admincategory'>
-              {!token ? <Redirect to="/"/> : (<Category />)}
-            </Route>
-          </div>
+        <div className="dashboard-panel-container">
+          <Routes>
+            <Route path='/dashboard' element={!token ? <Navigate to="/" /> : (<Introduction />)} />
+            <Route path='/dashboard/product' element={!token ? <Navigate to="/" /> : (<Order />)} />
+            <Route path='/dashboard/report' element={!token ? <Navigate to="/" /> : (<Report />)} />
+            <Route path='/dashboard/adminproduct' element={!token ? <Navigate to="/" /> : (<Product />)}/>
+            <Route path='/dashboard/admincategory' element= {!token ? <Navigate to="/" /> : (<Category />)}/>
+          </Routes>
+        </div>
         <Copyright />
       </main>
     </div>

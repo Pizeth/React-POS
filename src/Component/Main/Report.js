@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
-import { Container, Grid,Typography, Paper } from '@material-ui/core';
+import { Container, Grid,Typography, Paper } from '@mui/material';
 
 import { useStyles } from '../Style/StyleAdmin';
 

@@ -2,12 +2,9 @@ import clsx from 'clsx';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useStyles } from '../Style/StyleLogin';
-import { Link, useParams } from 'react-router-dom';
-import { Avatar, Button, CssBaseline, TextField, Grid2, Box, Typography, Container, Snackbar, SnackbarContent } from '@mui/material';
-
-// {/* --- IMPORT REDUCE --- */}
-import { connect } from 'react-redux';
-import { postRegister } from '../../Redux/Actions/actAuth'
+import   
+ { useNavigate, Link } from 'react-router-dom';
+import { Avatar, Button, CssBaseline, TextField, Grid, Box, Typography, Container, Snackbar, SnackbarContent } from '@mui/material';
 
 // {/* --- IMPORT SNACKBAR --- */}
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -16,8 +13,8 @@ import ErrorIcon from '@mui/icons-material/Error';
 // {/* --- SNACKBAR FUNCTION --- */}
 const variantIcon = {
   success: CheckCircleIcon,
-  error: ErrorIcon
-}
+  error: ErrorIcon,
+};
 
 function SnackbarAlert(props) {
   const classes = useStyles();
@@ -27,60 +24,64 @@ function SnackbarAlert(props) {
   return (
     <SnackbarContent
       className={clsx(classes[variant], className)}
-      aria-describedby="client-snackbar"
+      aria-describedby="client-snackbar"   
+
       message={
         <span id="client-snackbar" className={classes.message}>
-          <Icon className={clsx(classes.icon, classes.iconVariant)} />
+          <Icon className={clsx(classes.icon,   
+ classes.iconVariant)} />
           {message}
         </span>
       }
     />
-  )
+  );
 }
 
-{/* --- SIGN UP FUNCTION --- */ }
-function SignUp(props) {
+{/* --- SIGN UP FUNCTION --- */}
+function SignUpNew()   
+ {
   const classes = useStyles();
-  const [showStatus, setShowStatus] = useState(false)
-  const [validate, setValidate] = useState('')
-  const [success, setSuccess] = useState('error')
+  const [showStatus, setShowStatus] = useState(false);
+  const [validate, setValidate] = useState('');
+  const [success, setSuccess] = useState('error');   
 
-  {/* --- SIGNUP REDUX --- */ }
-  const initialFormState = { username: "", password: "" };
-  const [saveSign, setSaveSign] = useState(initialFormState)
 
-  const signUp = (e) => {
+  const initialFormState = { username: '', password: '' };
+  const [saveSign, setSaveSign] = useState(initialFormState);
+  const navigate = useNavigate();
+
+  const signUpNew = (e) => {
     e.preventDefault();
-    props.dispatch(postRegister(saveSign))
-      .then((result) => {
-        console.log(result);
-        if (result.value.data.status !== 400) {
-          {/* --- VALIDATE SNACKBAR --- */ }
-          setValidate(result.value.data.data)
-          setSuccess("success")
-          setShowStatus(true)
-          {/* --- VALIDATE SNACKBAR --- */ }
+    axios.post('https://pixos-api.herokuapp.com/register', saveSign)
+      .then((response) => {
+        if (response.data.status !== 400) {
+          setValidate(response.data.data);
+          setSuccess('success');
+          setShowStatus(true);
           setTimeout(() => {
-            props.history.push('/')
-          }, 1000)
+            navigate('/');
+          }, 1000);
         } else {
-          setValidate(result.value.data.data)
-          setShowStatus(true)
+          setValidate(response.data.data);
+          setShowStatus(true);
         }
       })
-      .catch((error) => setShowStatus(false));
-  }
+      .catch((error) => {
+        setShowStatus(false);
+        console.error('Registration error:', error);
+      });
+  };
 
-  {/* --- INPUT SIGN UP --- */ }
+  {/* --- INPUT SIGN UP --- */}
   const onChangeSignup = (e) => {
-    e.persist()
-    setSaveSign({ ...saveSign, [e.target.name]: e.target.value })
-  }
+    e.persist();
+    setSaveSign({ ...saveSign, [e.target.name]: e.target.value });
+  };
 
-  {/* --- CLOSE SNACKBAR --- */ }
+  {/* --- CLOSE SNACKBAR --- */}
   const handleCloseSnackbar = () => {
-    setShowStatus(false)
-  }
+    setShowStatus(false);
+  };
 
   return (
     <div>
@@ -109,7 +110,7 @@ function SignUp(props) {
           <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
-          <form className={classes.form} onSubmit={signUp} noValidate>
+          <form className={classes.form} onSubmit={signUpNew} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
@@ -118,7 +119,8 @@ function SignUp(props) {
               label="Username"
               name="username"
               type="text"
-              value={saveSign.name}
+              value={saveSign.username}   
+
               onChange={onChangeSignup}
             />
             <TextField
@@ -128,7 +130,8 @@ function SignUp(props) {
               label="Password"
               name="password"
               type="password"
-              value={saveSign.name}
+              value={saveSign.password}   
+
               onChange={onChangeSignup}
             />
 
@@ -143,49 +146,26 @@ function SignUp(props) {
             >
               Sign Up
             </Button>
-            <Grid2 container>
-              <Grid2 item={+true} xs={12}>
+            <Grid container>
+              <Grid item xs>
                 <br />
                 <Link className={classes.linkUnderline} to="#" variant="body2">
                   Read term and policy
                 </Link>
-              </Grid2>
-              <Grid2 item={+true} xs={12}>
+              </Grid>
+              <Grid item xs>
                 <br />
-                Already have account? <Link className={classes.linkUnderline} to='/'>Login</Link>
-              </Grid2>
-            </Grid2>
+                Already have account? <Link className={classes.linkUnderline} to="/">Login</Link>
+              </Grid>
+            </Grid>
           </form>
         </div>
         <Box mt={8}>
         </Box>
       </Container>
-    </div>
+    </div>   
+
   );
 }
 
-// const withRouter = Component => props => {
-//   // const location = useLocation();
-//   // const navigate = useNavigate();
-//   const params = useParams();
-
-//   return (
-//     <Component
-//       {...props}
-//       // location={location}
-//       // navigate={navigate}
-//       params={params}
-//     />
-//   );
-// };
-
-{/* --- RESPONSE --- */ }
-const mapStateToProps = state => {
-  return {
-    response: state.redAuth.registerResponse
-  };
-};
-
-// export default withRouter(connect(mapStateToProps)(SignUp));
-
-export default connect(mapStateToProps)(SignUp);
+export default SignUpNew;

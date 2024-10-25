@@ -2,15 +2,15 @@ import clsx from 'clsx';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useStyles } from '../Style/StyleAdminPage';
-import { Link, withRouter } from 'react-router-dom';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-import {  Table, TableBody, TableCell,TablePagination, TableHead, Divider, TableRow, IconButton, Paper, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import { Link, useParams } from 'react-router-dom';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import {  Table, TableBody, TableCell,TablePagination, TableHead, Divider, TableRow, IconButton, Paper, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ErrorIcon from '@material-ui/icons/Error';
-import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ErrorIcon from '@mui/icons-material/Error';
+import Snackbar from '@mui/material/Snackbar';
+import SnackbarContent from '@mui/material/SnackbarContent';
 
 const variantIcon = {
   success : CheckCircleIcon,
@@ -215,5 +215,20 @@ function AdminCategory(props) {
     </div>
   )
 }
+
+const withRouter = Component => props => {
+  // const location = useLocation();
+  // const navigate = useNavigate();
+  const params = useParams();
+
+  return (
+    <Component
+      {...props}
+      // location={location}
+      // navigate={navigate}
+      params={params}
+    />
+  );
+};
 
 export default withRouter(AdminCategory)

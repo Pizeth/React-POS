@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Grid, Paper, Typography } from '@material-ui/core';
+import { Container, Grid, Paper, Typography } from '@mui/material';
 
 import { useStyles } from '../Style/StyleMessage';
 

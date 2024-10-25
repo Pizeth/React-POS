@@ -1,14 +1,14 @@
 import clsx from 'clsx';
 import axios from 'axios'
-import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from '@mui/icons-material/Edit';
 import React, {useEffect, useState} from 'react';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { Link, withRouter } from 'react-router-dom';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Link, useParams } from 'react-router-dom';
 import { useStyles } from '../Style/StyleAdminPage';
-import {  Table, Snackbar, SnackbarContent, TableBody, TableCell, TableHead, Divider, TableRow, IconButton, Paper, Avatar, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TablePagination} from '@material-ui/core';
+import {  Table, Snackbar, SnackbarContent, TableBody, TableCell, TableHead, Divider, TableRow, IconButton, Paper, Avatar, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TablePagination} from '@mui/material';
 
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ErrorIcon from '@material-ui/icons/Error';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ErrorIcon from '@mui/icons-material/Error';
 
 
 // {/* --- IMPORT REDUCE --- */}
@@ -242,6 +242,20 @@ function AdminProduct(props) {
   )
 }
 
+const withRouter = Component => props => {
+  // const location = useLocation();
+  // const navigate = useNavigate();
+  const params = useParams();
+
+  return (
+    <Component
+      {...props}
+      // location={location}
+      // navigate={navigate}
+      params={params}
+    />
+  );
+};
 
 {/* --- RESPONSE --- */}
 const mapStateToProps = state => {

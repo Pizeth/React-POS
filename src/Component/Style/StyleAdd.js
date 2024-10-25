@@ -1,6 +1,6 @@
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
-import InputBase from '@material-ui/core/InputBase';
+import { makeStyles, withStyles } from '@mui/styles';
+import { green } from '@mui/material/colors';
+import InputBase from '@mui/material/InputBase';
 
 export const BootstrapInput = withStyles(theme => ({
   '@global': {
